@@ -206,8 +206,10 @@ class swizzle_storage {
 	typename scalar_traits<T>::scalar_type value[STORAGE];
 	static std::size_t swizzle_index(std::size_t i) {
 		std::size_t swiz_i = (MASK >> (8 * i)) & 0xFF;
-		if (swiz_i >= STORAGE) throw std::bad_array_new_length;
-		if (swiz_i < 0) throw std::bad_array_new_length;
+		if (swiz_i >= STORAGE) 
+			throw std::bad_array_new_length();
+		if (swiz_i < 0) 
+			throw std::bad_array_new_length();
 		return swiz_i;
 	}
 public:
@@ -216,10 +218,10 @@ public:
 	}
 
 	const T& operator [] (std::size_t i) const {
-		return *reinterpret_cast<const T*>(&value[sizzle_index(i)]);
+		return *reinterpret_cast<const T*>(&value[swizzle_index(i)]);
 	}
 
-	swizzle_storage& operator = (const T& operand) {
+	swizzle_storage& operator = (const T operand) {
 		for (auto i = 0; i < N; ++i)
 			(*this)[i] = operand;
 		return *this;
@@ -239,7 +241,7 @@ public:
 template <typename T, std::size_t STORAGE, std::size_t N, unsigned int MASK>
 class swizzle : public vector_plural_usage<T, N, swizzle_storage<T, STORAGE, N, MASK>> {
 public:
-	swizzle& operator = (const T& operand) {
+	swizzle& operator = (const T operand) {
 		swizzle_storage<T, STORAGE, N, MASK>::operator=(operand);
 		return *this;
 	}
@@ -254,7 +256,7 @@ public:
 template <typename T, std::size_t STORAGE, unsigned int MASK>
 class swizzle<T, STORAGE, 1, MASK> : public vector_usage<T, 1, swizzle_storage<T, STORAGE, 1, MASK>>{
 public:
-	swizzle& operator = (const T& operand) {
+	swizzle& operator = (const T operand) {
 		swizzle_storage<T, STORAGE, 1, MASK>::operator=(operand);
 		return *this;
 	}
@@ -302,6 +304,9 @@ public:
 #endif
 	};
 
+	vector_storage() {
+	}
+
 	T& operator [] (std::size_t i) {
 		return reinterpret_cast<T*>(this)[i];
 	}
@@ -310,7 +315,7 @@ public:
 		return reinterpret_cast<const T*>(this)[i];
 	}
 
-	vector_storage& operator = (const T& operand) {
+	vector_storage& operator = (const T operand) {
 		for (auto i = 0; i < N; ++i)
 			(*this)[i] = operand;
 		return *this;
@@ -384,6 +389,9 @@ public:
 #endif
 	};
 
+	vector_storage() {
+	}
+
 	T& operator [] (std::size_t i) {
 		return reinterpret_cast<T*>(this)[i];
 	}
@@ -392,7 +400,7 @@ public:
 		return reinterpret_cast<const T*>(this)[i];
 	}
 
-	vector_storage& operator = (const T& operand) {
+	vector_storage& operator = (const T operand) {
 		for (auto i = 0; i < N; ++i)
 			(*this)[i] = operand;
 		return *this;
@@ -518,23 +526,26 @@ public:
 		swizzle<T, N, 1, 0x02> p;
 
 #ifdef BF_XYZW
-		BF_SWIZZLE_X(x);
-		BF_SWIZZLE_XY(x, y);
-		BF_SWIZZLE_XYZ(x, y, z);
+		BF_SWIZZLES_X(x);
+		BF_SWIZZLES_XY(x, y);
+		BF_SWIZZLES_XYZ(x, y, z);
 #endif
 
 #ifdef BF_RGBA
-		BF_SWIZZLE_X(r);
-		BF_SWIZZLE_XY(r, g);
-		BF_SWIZZLE_XYZ(r, g, b);
+		BF_SWIZZLES_X(r);
+		BF_SWIZZLES_XY(r, g);
+		BF_SWIZZLES_XYZ(r, g, b);
 #endif
 
 #ifdef BF_STPQ
-		BF_SWIZZLE_X(s);
-		BF_SWIZZLE_XY(s, t);
-		BF_SWIZZLE_XYZ(s, t, p);
+		BF_SWIZZLES_X(s);
+		BF_SWIZZLES_XY(s, t);
+		BF_SWIZZLES_XYZ(s, t, p);
 #endif
 	};
+
+	vector_storage() {
+	}
 
 	T& operator [] (std::size_t i) {
 		return reinterpret_cast<T*>(this)[i];
@@ -544,7 +555,7 @@ public:
 		return reinterpret_cast<const T*>(this)[i];
 	}
 
-	vector_storage& operator = (const T& operand) {
+	vector_storage& operator = (const T operand) {
 		for (auto i = 0; i < N; ++i)
 			(*this)[i] = operand;
 		return *this;
@@ -800,26 +811,29 @@ public:
 		swizzle<T, N, 1, 0x02> p;
 
 #ifdef BF_XYZW
-		BF_SWIZZLE_X(x);
-		BF_SWIZZLE_XY(x, y);
-		BF_SWIZZLE_XYZ(x, y, z);
-		BF_SWIZZLE_XYZW(x, y, z, w);
+		BF_SWIZZLES_X(x);
+		BF_SWIZZLES_XY(x, y);
+		BF_SWIZZLES_XYZ(x, y, z);
+		BF_SWIZZLES_XYZW(x, y, z, w);
 #endif
 
 #ifdef BF_RGBA
-		BF_SWIZZLE_X(r);
-		BF_SWIZZLE_XY(r, g);
-		BF_SWIZZLE_XYZ(r, g, b);
-		BF_SWIZZLE_XYZW(r, g, b, a);
+		BF_SWIZZLES_X(r);
+		BF_SWIZZLES_XY(r, g);
+		BF_SWIZZLES_XYZ(r, g, b);
+		BF_SWIZZLES_XYZW(r, g, b, a);
 #endif
 
 #ifdef BF_STPQ
-		BF_SWIZZLE_X(s);
-		BF_SWIZZLE_XY(s, t);
-		BF_SWIZZLE_XYZ(s, t, p);
-		BF_SWIZZLE_XYZW(s, t, p, q);
+		BF_SWIZZLES_X(s);
+		BF_SWIZZLES_XY(s, t);
+		BF_SWIZZLES_XYZ(s, t, p);
+		BF_SWIZZLES_XYZW(s, t, p, q);
 #endif
 	};
+
+	vector_storage() {
+	}
 
 	T& operator [] (std::size_t i) {
 		return reinterpret_cast<T*>(this)[i];
@@ -829,7 +843,7 @@ public:
 		return reinterpret_cast<const T*>(this)[i];
 	}
 
-	vector_storage& operator = (const T& operand) {
+	vector_storage& operator = (const T operand) {
 		for (auto i = 0; i < N; ++i)
 			(*this)[i] = operand;
 		return *this;
@@ -905,7 +919,7 @@ public:
 		(*this)[0] = T(vec[0]);
 	}
 
-	vector& operator = (const T& operand) {
+	vector& operator = (const T operand) {
 		vector_storage<T, N>::operator=(operand);
 		return *this;
 	}
@@ -955,7 +969,7 @@ public:
 	vector(const vector_usage<T2, N, S2>& vec) : vector_plural<T, N>(vec) {
 	}
 
-	vector& operator = (const T& operand) {
+	vector& operator = (const T operand) {
 		vector_storage<T, N>::operator=(operand);
 		return *this;
 	}
@@ -1022,7 +1036,7 @@ public:
 	vector(const vector_usage<T2, N, S2>& vec) : vector_plural<T, N>(vec) {
 	}
 
-	vector& operator = (const T& operand) {
+	vector& operator = (const T operand) {
 		vector_storage<T, N>::operator=(operand);
 		return *this;
 	}
@@ -1117,7 +1131,7 @@ public:
 	vector(const vector_usage<T2, N, S2>& vec) : vector_plural<T, N>(vec) {
 	}
 
-	vector& operator = (const T& operand) {
+	vector& operator = (const T operand) {
 		vector_storage<T, N>::operator=(operand);
 		return *this;
 	}

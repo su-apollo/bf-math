@@ -1,3 +1,4 @@
+#include "xyzw.hpp"
 #include "vector.hpp"
 
 #include <Windows.h>
@@ -39,9 +40,13 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 		std::cout << "bool is scalar" << std::endl;
 
 	bf::float1 vec1(1.f);
-	bf::float2 vec2(1.f, 1.f);
-	bf::float3 vec3(1.f, 1.f, 1.f);
-	bf::float4 vec4(1.f, 1.f, 1.f, 1.f);
+	bf::float2 vec2(1.f, 2.f);
+	bf::float3 vec3(1.f, 2.f, 3.f);
+	bf::float4 vec4(1.f, 2.f, 3.f, 4.f);
+
+	bf::float4 foo(0);
+	foo.yx = bf::float2(2, 1);
+	foo.zw = foo.xy * 2;
 
 	system("PAUSE");
 	// Exit program
