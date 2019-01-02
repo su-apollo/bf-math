@@ -1,6 +1,7 @@
 #pragma once
 
 namespace bf {
+namespace math{
 template <typename T1, typename T2 = T1>
 struct scalar_traits {};
 
@@ -47,4 +48,5 @@ struct scalar_traits<double, int> : scalar_traits<double>{};
 
 template <>
 struct scalar_traits<int, double> : scalar_traits<double>{};
+}
 }

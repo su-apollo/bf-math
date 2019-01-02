@@ -64,6 +64,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="matrix-usage.hpp" />
     <ClInclude Include="rgba.hpp" />
     <ClInclude Include="scalar.hpp" />
     <ClInclude Include="stpq.hpp" />

@@ -4,6 +4,7 @@
 #include <exception>
 
 namespace bf {
+namespace math {
 template <typename T, std::size_t N>
 class vector_storage;
 
@@ -1440,4 +1441,5 @@ public:
 		return *this;
 	}
 };
+}
 }

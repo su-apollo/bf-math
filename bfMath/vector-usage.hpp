@@ -2,6 +2,7 @@
 #include <cstddef>
 
 namespace bf {
+namespace math {
 template <typename T, std::size_t N>
 class vector {};
 
@@ -198,4 +199,5 @@ public:
 template <typename T, std::size_t N, typename S>
 class vector_plural_usage : public vector_usage<T, N, S> {
 };
+}
 }

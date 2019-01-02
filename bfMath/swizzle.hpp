@@ -5,6 +5,7 @@
 #include <exception>
 
 namespace bf {
+namespace math {
 template <typename T, std::size_t STORAGE, std::size_t N, unsigned int MASK>
 class swizzle_storage {
 private:
@@ -197,4 +198,5 @@ public:
 	}
 };
 */
+}
 }

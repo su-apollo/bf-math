@@ -4,6 +4,7 @@
 #include <utility>
 
 namespace bf {
+namespace math {
 // operator +
 template <typename T1, typename T2, int N, typename S1, typename S2>
 vector<typename scalar_traits<T1, T2>::scalar_type, N> operator + (const vector_usage<T1, N, S1>& a, const vector_usage<T2, N, S2>& b)
@@ -961,5 +962,6 @@ vector<typename scalar_traits<T1, T2>::bool_type, N> operator || (const vector_u
 	for (int i = 0; i < N; ++i)
 		r[i] = result_type(a[0]) || result_type(b[i]);
 	return r;
+}
 }
 }
