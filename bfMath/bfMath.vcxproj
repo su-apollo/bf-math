@@ -68,9 +68,10 @@
     <ClInclude Include="scalar.hpp" />
     <ClInclude Include="stpq.hpp" />
     <ClInclude Include="swizzle.hpp" />
-    <ClInclude Include="vector-definition.hpp" />
-    <ClInclude Include="vector-operation.hpp" />
+    <ClInclude Include="vector-storage.hpp" />
+    <ClInclude Include="vector-operater.hpp" />
     <ClInclude Include="vector.hpp" />
+    <ClInclude Include="vector-usage.hpp" />
     <ClInclude Include="xyzw.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

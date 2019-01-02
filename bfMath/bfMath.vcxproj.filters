@@ -18,16 +18,19 @@
     <ClInclude Include="rgba.hpp">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="vector-operation.hpp">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="vector-definition.hpp">
-      <Filter>src</Filter>
-    </ClInclude>
     <ClInclude Include="stpq.hpp">
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="swizzle.hpp">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="vector-usage.hpp">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="vector-storage.hpp">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="vector-operater.hpp">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

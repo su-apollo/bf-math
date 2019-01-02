@@ -1,284 +1,23 @@
 #pragma once
-#include "scalar.hpp"
+#include "swizzle.hpp"
 
 #include <exception>
 
 namespace bf {
 template <typename T, std::size_t N>
-class vector {};
-
-template <typename T, std::size_t N, typename S>
-class vector_usage : public S {
-public:
-	vector_usage& operator += (const T& operand) {
-		for (auto i = 0; i < N; ++i)
-			(*this)[i] += operand;
-		return *this;
-	}
-
-	template <typename T2, typename S2>
-	vector_usage& operator += (const vector_usage<T2, N, S2>& operand) {
-		vector<T, N> temp;
-		for (auto i = 0; i < N; ++i)
-			temp[i] = operand[i];
-		for (auto i = 0; i < N; ++i)
-			(*this)[i] += temp[i];
-		return *this
-	}
-
-	vector_usage& operator -= (const T& operand) {
-		for (auto i = 0; i < N; ++i)
-			(*this)[i] -= operand;
-		return *this;
-	}
-
-	template <typename T2, typename S2>
-	vector_usage& operator -= (const vector_usage<T2, N, S2>& operand) {
-		vector<T, N> temp;
-		for (auto i = 0; i < N; ++i)
-			temp[i] = operand[i];
-		for (auto i = 0; i < N; ++i)
-			(*this)[i] -= temp[i];
-		return *this
-	}
-
-	vector_usage& operator *= (const T& operand) {
-		for (auto i = 0; i < N; ++i)
-			(*this)[i] *= operand;
-		return *this;
-	}
-
-	template <typename T2, typename S2>
-	vector_usage& operator *= (const vector_usage<T2, N, S2>& operand) {
-		vector<T, N> temp;
-		for (auto i = 0; i < N; ++i)
-			temp[i] = operand[i];
-		for (auto i = 0; i < N; ++i)
-			(*this)[i] *= temp[i];
-		return *this
-	}
-
-	vector_usage& operator /= (const T& operand) {
-		for (auto i = 0; i < N; ++i)
-			(*this)[i] /= operand;
-		return *this;
-	}
-
-	template <typename T2, typename S2>
-	vector_usage& operator /= (const vector_usage<T2, N, S2>& operand) {
-		vector<T, N> temp;
-		for (auto i = 0; i < N; ++i)
-			temp[i] = operand[i];
-		for (auto i = 0; i < N; ++i)
-			(*this)[i] /= temp[i];
-		return *this
-	}
-
-	vector_usage& operator %= (const T& operand) {
-		for (auto i = 0; i < N; ++i)
-			(*this)[i] %= operand;
-		return *this;
-	}
-
-	template <typename T2, typename S2>
-	vector_usage& operator %= (const vector_usage<T2, N, S2>& operand) {
-		vector<T, N> temp;
-		for (auto i = 0; i < N; ++i)
-			temp[i] = operand[i];
-		for (auto i = 0; i < N; ++i)
-			(*this)[i] %= temp[i];
-		return *this
-	}
-
-	vector_usage& operator ^= (const T& operand) {
-		for (auto i = 0; i < N; ++i)
-			(*this)[i] ^= operand;
-		return *this;
-	}
-
-	template <typename T2, typename S2>
-	vector_usage& operator ^= (const vector_usage<T2, N, S2>& operand) {
-		vector<T, N> temp;
-		for (auto i = 0; i < N; ++i)
-			temp[i] = operand[i];
-		for (auto i = 0; i < N; ++i)
-			(*this)[i] ^= temp[i];
-		return *this
-	}
-
-	vector_usage& operator &= (const T& operand) {
-		for (auto i = 0; i < N; ++i)
-			(*this)[i] &= operand;
-		return *this;
-	}
-
-	template <typename T2, typename S2>
-	vector_usage& operator &= (const vector_usage<T2, N, S2>& operand) {
-		vector<T, N> temp;
-		for (auto i = 0; i < N; ++i)
-			temp[i] = operand[i];
-		for (auto i = 0; i < N; ++i)
-			(*this)[i] &= temp[i];
-		return *this
-	}
-
-	vector_usage& operator |= (const T& operand) {
-		for (auto i = 0; i < N; ++i)
-			(*this)[i] |= operand;
-		return *this;
-	}
-
-	template <typename T2, typename S2>
-	vector_usage& operator |= (const vector_usage<T2, N, S2>& operand) {
-		vector<T, N> temp;
-		for (auto i = 0; i < N; ++i)
-			temp[i] = operand[i];
-		for (auto i = 0; i < N; ++i)
-			(*this)[i] |= temp[i];
-		return *this
-	}
-
-	vector_usage& operator <<= (const T& operand) {
-		for (auto i = 0; i < N; ++i)
-			(*this)[i] <<= operand;
-		return *this;
-	}
-
-	template <typename T2, typename S2>
-	vector_usage& operator <<= (const vector_usage<T2, N, S2>& operand) {
-		vector<T, N> temp;
-		for (auto i = 0; i < N; ++i)
-			temp[i] = operand[i];
-		for (auto i = 0; i < N; ++i)
-			(*this)[i] <<= temp[i];
-		return *this
-	}
-
-	vector_usage& operator >>= (const T& operand) {
-		for (auto i = 0; i < N; ++i)
-			(*this)[i] >>= operand;
-		return *this;
-	}
-
-	template <typename T2, typename S2>
-	vector_usage& operator >>= (const vector_usage<T2, N, S2>& operand) {
-		vector<T, N> temp;
-		for (auto i = 0; i < N; ++i)
-			temp[i] = operand[i];
-		for (auto i = 0; i < N; ++i)
-			(*this)[i] >>= temp[i];
-		return *this
-	}
-
-	vector_usage& operator ++ () {
-		for (auto i = 0; i < n; ++i)
-			++(*this)[i];
-		return *this;
-	}
-
-	vector_usage& operator ++ (int) {
-		vector_usage ret(*this);
-		for (auto i = 0; i < n; ++i)
-			++(*this)[i];
-		return ret;
-	}
-
-	vector_usage& operator -- () {
-		for (auto i = 0; i < n; ++i)
-			--(*this)[i];
-		return *this;
-	}
-
-	vector_usage& operator -- (int) {
-		vector_usage ret(*this);
-		for (auto i = 0; i < n; ++i)
-			--(*this)[i];
-		return ret;
-	}
-};
-
-template <typename T, std::size_t N, typename S>
-class vector_plural_usage : public vector_usage<T, N, S> {
-};
-
-template <typename T, std::size_t STORAGE, std::size_t N, unsigned int MASK>
-class swizzle_storage {
-	typename scalar_traits<T>::scalar_type value[STORAGE];
-	static std::size_t swizzle_index(std::size_t i) {
-		std::size_t swiz_i = (MASK >> (8 * i)) & 0xFF;
-		if (swiz_i >= STORAGE) 
-			throw std::bad_array_new_length();
-		if (swiz_i < 0) 
-			throw std::bad_array_new_length();
-		return swiz_i;
-	}
-public:
-	T& operator [] (std::size_t i) {
-		return *reinterpret_cast<T*>(&value[swizzle_index(i)]);
-	}
-
-	const T& operator [] (std::size_t i) const {
-		return *reinterpret_cast<const T*>(&value[swizzle_index(i)]);
-	}
-
-	swizzle_storage& operator = (const T operand) {
-		for (auto i = 0; i < N; ++i)
-			(*this)[i] = operand;
-		return *this;
-	}
-
-	template <typename T2, typename S2>
-	swizzle_storage& operator = (const vector_usage<T2, N, S2>& operand) {
-		vector<T, N> temp;
-		for (auto i = 0; i < N; ++i)
-			temp[i] = operand[i];
-		for (auto i = 0; i < N; ++i)
-			(*this)[i] = temp[i];
-		return *this;
-	}
-};
-
-template <typename T, std::size_t STORAGE, std::size_t N, unsigned int MASK>
-class swizzle : public vector_plural_usage<T, N, swizzle_storage<T, STORAGE, N, MASK>> {
-public:
-	swizzle& operator = (const T operand) {
-		swizzle_storage<T, STORAGE, N, MASK>::operator=(operand);
-		return *this;
-	}
-
-	template<typename T2, typename S2>
-	swizzle& operator = (const vector_usage<T2, N, S2>& operand) {
-		swizzle_storage<T, STORAGE, N, MASK>::operator=(operand);
-		return *this;
-	}
-};
-
-template <typename T, std::size_t STORAGE, unsigned int MASK>
-class swizzle<T, STORAGE, 1, MASK> : public vector_usage<T, 1, swizzle_storage<T, STORAGE, 1, MASK>>{
-public:
-	swizzle& operator = (const T operand) {
-		swizzle_storage<T, STORAGE, 1, MASK>::operator=(operand);
-		return *this;
-	}
-
-	template<typename T2, typename S2>
-	swizzle& operator = (const vector_usage<T2, 1, S2>& operand) {
-		swizzle_storage<T, STORAGE, 1, MASK>::operator=(operand);
-		return *this;
-	}
-
-	operator T() const {
-		return (*this)[0];
-	}
-};
-
-template <typename T, std::size_t N>
 class vector_storage;
 
 #define BF_SWIZZLES_X(_x) \
-const swizzle<T, N, 2, 0x0000> _x##_x; \
-const swizzle<T, N, 3, 0x000000> _x##_x##_x; \
-const swizzle<T, N, 4, 0x00000000> _x##_x##_x##_x
+	const swizzle<T, N, 2, 0x0000> _x##_x; \
+	const swizzle<T, N, 3, 0x000000> _x##_x##_x; \
+	const swizzle<T, N, 4, 0x00000000> _x##_x##_x##_x
+
+/*
+#define BF_SWIZZLES_X(_x) \
+	const swizzle<T, N, 2, 0, 0> _x##_x; \
+	const swizzle<T, N, 3, 0, 0, 0> _x##_x##_x; \
+	const swizzle<T, N, 4, 0, 0, 0, 0> _x##_x##_x##_x
+*/
 
 template <typename T>
 class vector_storage<T, 1> {
@@ -290,6 +29,12 @@ public:
 		swizzle<T, N, 1, 0x00> x;
 		swizzle<T, N, 1, 0x00> r;
 		swizzle<T, N, 1, 0x00> s;
+
+		/*
+		swizzle<T, N, 1, 0> x;
+		swizzle<T, N, 1, 0> r;
+		swizzle<T, N, 1, 0> s;
+		*/
 
 #ifdef BF_XYZW
 		BF_SWIZZLES_X(x);
@@ -315,19 +60,23 @@ public:
 		return reinterpret_cast<const T*>(this)[i];
 	}
 
-	vector_storage& operator = (const T operand) {
+	vector_storage& operator = (const T& operand) {
 		for (auto i = 0; i < N; ++i)
 			(*this)[i] = operand;
+
 		return *this;
 	}
 
 	template <typename T2, typename S2>
 	vector_storage& operator = (const vector_usage<T2, N, S2>& operand) {
 		vector<T, N> temp;
+		
 		for (auto i = 0; i < N; ++i)
 			temp[i] = operand[i];
+		
 		for (auto i = 0; i < N; ++i)
 			(*this)[i] = temp[i];
+		
 		return *this;
 	}
 };
@@ -359,6 +108,35 @@ public:
 	const swizzle<T, N, 4, 0x00010101> _y##_y##_y##_x; \
 	const swizzle<T, N, 4, 0x01010101> _y##_y##_y##_y
 
+/*
+#define BF_SWIZZLES_XY(_x, _y) \
+	swizzle<T, N, 2, 0, 1> _x##_y; \
+	swizzle<T, N, 2, 1, 0> _y##_x; \
+	const swizzle<T, N, 2, 1, 1> _y##_y; \
+	const swizzle<T, N, 3, 0, 0, 1> _x##_x##_y; \
+	const swizzle<T, N, 3, 0, 1, 0> _x##_y##_x; \
+	const swizzle<T, N, 3, 0, 1, 1> _x##_y##_y; \
+	const swizzle<T, N, 3, 1, 0, 0> _y##_x##_x; \
+	const swizzle<T, N, 3, 1, 0, 1> _y##_x##_y; \
+	const swizzle<T, N, 3, 1, 1, 0> _y##_y##_x; \
+	const swizzle<T, N, 3, 1, 1, 1> _y##_y##_y; \
+	const swizzle<T, N, 4, 0, 0, 0, 1> _x##_x##_x##_y; \
+	const swizzle<T, N, 4, 0, 0, 1, 0> _x##_x##_y##_x; \
+	const swizzle<T, N, 4, 0, 0, 1, 1> _x##_x##_y##_y; \
+	const swizzle<T, N, 4, 0, 1, 0, 0> _x##_y##_x##_x; \
+	const swizzle<T, N, 4, 0, 1, 0, 1> _x##_y##_x##_y; \
+	const swizzle<T, N, 4, 0, 1, 1, 0> _x##_y##_y##_x; \
+	const swizzle<T, N, 4, 0, 1, 1, 1> _x##_y##_y##_y; \
+	const swizzle<T, N, 4, 1, 0, 0, 0> _y##_x##_x##_x; \
+	const swizzle<T, N, 4, 1, 0, 0, 1> _y##_x##_x##_y; \
+	const swizzle<T, N, 4, 1, 0, 1, 0> _y##_x##_y##_x; \
+	const swizzle<T, N, 4, 1, 0, 1, 1> _y##_x##_y##_y; \
+	const swizzle<T, N, 4, 1, 1, 0, 0> _y##_y##_x##_x; \
+	const swizzle<T, N, 4, 1, 1, 0, 1> _y##_y##_x##_y; \
+	const swizzle<T, N, 4, 1, 1, 1, 0> _y##_y##_y##_x; \
+	const swizzle<T, N, 4, 1, 1, 1, 1> _y##_y##_y##_y
+*/
+
 template <typename T>
 class vector_storage<T, 2> {
 protected:
@@ -372,6 +150,15 @@ public:
 		swizzle<T, N, 1, 0x01> y;
 		swizzle<T, N, 1, 0x01> g;
 		swizzle<T, N, 1, 0x01> t;
+
+		/*
+		swizzle<T, N, 1, 0> x;
+		swizzle<T, N, 1, 0> r;
+		swizzle<T, N, 1, 0> s;
+		swizzle<T, N, 1, 1> y;
+		swizzle<T, N, 1, 1> g;
+		swizzle<T, N, 1, 1> t;
+		*/
 
 #ifdef BF_XYZW
 		BF_SWIZZLES_X(x);
@@ -400,19 +187,23 @@ public:
 		return reinterpret_cast<const T*>(this)[i];
 	}
 
-	vector_storage& operator = (const T operand) {
+	vector_storage& operator = (const T& operand) {
 		for (auto i = 0; i < N; ++i)
 			(*this)[i] = operand;
+
 		return *this;
 	}
 
 	template <typename T2, typename S2>
 	vector_storage& operator = (const vector_usage<T2, N, S2>& operand) {
 		vector<T, N> temp;
+
 		for (auto i = 0; i < N; ++i)
 			temp[i] = operand[i];
+
 		for (auto i = 0; i < N; ++i)
 			(*this)[i] = temp[i];
+
 		return *this;
 	}
 };
@@ -508,6 +299,99 @@ public:
 	const swizzle<T, N, 4, 0x01020202> _z##_z##_z##_y; \
 	const swizzle<T, N, 4, 0x02020202> _z##_z##_z##_z
 
+/*
+#define BF_SWIZZLES_XYZ(_x, _y, _z) \
+	swizzle<T, N, 2, 0, 2> _x##_z; \
+	swizzle<T, N, 2, 1, 2> _y##_z; \
+	swizzle<T, N, 2, 2, 0> _z##_x; \
+	swizzle<T, N, 2, 2, 1> _z##_y; \
+	const swizzle<T, N, 2, 2, 2> _z##_z; \
+	const swizzle<T, N, 3, 0, 0, 2> _x##_x##_z; \
+	swizzle<T, N, 3, 0, 1, 2> _x##_y##_z; \
+	const swizzle<T, N, 3, 0, 2, 0> _x##_z##_x; \
+	swizzle<T, N, 3, 0, 2, 1> _x##_z##_y; \
+	const swizzle<T, N, 3, 0, 2, 2> _x##_z##_z; \
+	swizzle<T, N, 3, 1, 0, 2> _y##_x##_z; \
+	const swizzle<T, N, 3, 1, 1, 2> _y##_y##_z; \
+	swizzle<T, N, 3, 1, 2, 0> _y##_z##_x; \
+	const swizzle<T, N, 3, 1, 2, 1> _y##_z##_y; \
+	const swizzle<T, N, 3, 1, 2, 2> _y##_z##_z; \
+	const swizzle<T, N, 3, 2, 0, 0> _z##_x##_x; \
+	swizzle<T, N, 3, 2, 0, 1> _z##_x##_y; \
+	const swizzle<T, N, 3, 2, 0, 2> _z##_x##_z; \
+	swizzle<T, N, 3, 2, 1, 0> _z##_y##_x; \
+	const swizzle<T, N, 3, 2, 1, 1> _z##_y##_y; \
+	const swizzle<T, N, 3, 2, 1, 2> _z##_y##_z; \
+	const swizzle<T, N, 3, 2, 2, 0> _z##_z##_x; \
+	const swizzle<T, N, 3, 2, 2, 1> _z##_z##_y; \
+	const swizzle<T, N, 3, 2, 2, 2> _z##_z##_z; \
+	const swizzle<T, N, 4, 0, 0, 0, 2> _x##_x##_x##_z; \
+	const swizzle<T, N, 4, 0, 0, 1, 2> _x##_x##_y##_z; \
+	const swizzle<T, N, 4, 0, 0, 2, 0> _x##_x##_z##_x; \
+	const swizzle<T, N, 4, 0, 0, 2, 1> _x##_x##_z##_y; \
+	const swizzle<T, N, 4, 0, 0, 2, 2> _x##_x##_z##_z; \
+	const swizzle<T, N, 4, 0, 1, 0, 2> _x##_y##_x##_z; \
+	const swizzle<T, N, 4, 0, 1, 1, 2> _x##_y##_y##_z; \
+	const swizzle<T, N, 4, 0, 1, 2, 0> _x##_y##_z##_x; \
+	const swizzle<T, N, 4, 0, 1, 2, 1> _x##_y##_z##_y; \
+	const swizzle<T, N, 4, 0, 1, 2, 2> _x##_y##_z##_z; \
+	const swizzle<T, N, 4, 0, 2, 0, 0> _x##_z##_x##_x; \
+	const swizzle<T, N, 4, 0, 2, 0, 1> _x##_z##_x##_y; \
+	const swizzle<T, N, 4, 0, 2, 0, 2> _x##_z##_x##_z; \
+	const swizzle<T, N, 4, 0, 2, 1, 0> _x##_z##_y##_x; \
+	const swizzle<T, N, 4, 0, 2, 1, 1> _x##_z##_y##_y; \
+	const swizzle<T, N, 4, 0, 2, 1, 2> _x##_z##_y##_z; \
+	const swizzle<T, N, 4, 0, 2, 2, 0> _x##_z##_z##_x; \
+	const swizzle<T, N, 4, 0, 2, 2, 1> _x##_z##_z##_y; \
+	const swizzle<T, N, 4, 0, 2, 2, 2> _x##_z##_z##_z; \
+	const swizzle<T, N, 4, 1, 0, 0, 2> _y##_x##_x##_z; \
+	const swizzle<T, N, 4, 1, 0, 1, 2> _y##_x##_y##_z; \
+	const swizzle<T, N, 4, 1, 0, 2, 0> _y##_x##_z##_x; \
+	const swizzle<T, N, 4, 1, 0, 2, 1> _y##_x##_z##_y; \
+	const swizzle<T, N, 4, 1, 0, 2, 2> _y##_x##_z##_z; \
+	const swizzle<T, N, 4, 1, 1, 0, 2> _y##_y##_x##_z; \
+	const swizzle<T, N, 4, 1, 1, 1, 2> _y##_y##_y##_z; \
+	const swizzle<T, N, 4, 1, 1, 2, 0> _y##_y##_z##_x; \
+	const swizzle<T, N, 4, 1, 1, 2, 1> _y##_y##_z##_y; \
+	const swizzle<T, N, 4, 1, 1, 2, 2> _y##_y##_z##_z; \
+	const swizzle<T, N, 4, 1, 2, 0, 0> _y##_z##_x##_x; \
+	const swizzle<T, N, 4, 1, 2, 0, 1> _y##_z##_x##_y; \
+	const swizzle<T, N, 4, 1, 2, 0, 2> _y##_z##_x##_z; \
+	const swizzle<T, N, 4, 1, 2, 1, 0> _y##_z##_y##_x; \
+	const swizzle<T, N, 4, 1, 2, 1, 1> _y##_z##_y##_y; \
+	const swizzle<T, N, 4, 1, 2, 1, 2> _y##_z##_y##_z; \
+	const swizzle<T, N, 4, 1, 2, 2, 0> _y##_z##_z##_x; \
+	const swizzle<T, N, 4, 1, 2, 2, 1> _y##_z##_z##_y; \
+	const swizzle<T, N, 4, 1, 2, 2, 2> _y##_z##_z##_z; \
+	const swizzle<T, N, 4, 2, 0, 0, 0> _z##_x##_x##_x; \
+	const swizzle<T, N, 4, 2, 0, 0, 1> _z##_x##_x##_y; \
+	const swizzle<T, N, 4, 2, 0, 0, 2> _z##_x##_x##_z; \
+	const swizzle<T, N, 4, 2, 0, 1, 0> _z##_x##_y##_x; \
+	const swizzle<T, N, 4, 2, 0, 1, 1> _z##_x##_y##_y; \
+	const swizzle<T, N, 4, 2, 0, 1, 2> _z##_x##_y##_z; \
+	const swizzle<T, N, 4, 2, 0, 2, 0> _z##_x##_z##_x; \
+	const swizzle<T, N, 4, 2, 0, 2, 1> _z##_x##_z##_y; \
+	const swizzle<T, N, 4, 2, 0, 2, 2> _z##_x##_z##_z; \
+	const swizzle<T, N, 4, 2, 1, 0, 0> _z##_y##_x##_x; \
+	const swizzle<T, N, 4, 2, 1, 0, 1> _z##_y##_x##_y; \
+	const swizzle<T, N, 4, 2, 1, 0, 2> _z##_y##_x##_z; \
+	const swizzle<T, N, 4, 2, 1, 1, 0> _z##_y##_y##_x; \
+	const swizzle<T, N, 4, 2, 1, 1, 1> _z##_y##_y##_y; \
+	const swizzle<T, N, 4, 2, 1, 1, 2> _z##_y##_y##_z; \
+	const swizzle<T, N, 4, 2, 1, 2, 0> _z##_y##_z##_x; \
+	const swizzle<T, N, 4, 2, 1, 2, 1> _z##_y##_z##_y; \
+	const swizzle<T, N, 4, 2, 1, 2, 2> _z##_y##_z##_z; \
+	const swizzle<T, N, 4, 2, 2, 0, 0> _z##_z##_x##_x; \
+	const swizzle<T, N, 4, 2, 2, 0, 1> _z##_z##_x##_y; \
+	const swizzle<T, N, 4, 2, 2, 0, 2> _z##_z##_x##_z; \
+	const swizzle<T, N, 4, 2, 2, 1, 0> _z##_z##_y##_x; \
+	const swizzle<T, N, 4, 2, 2, 1, 1> _z##_z##_y##_y; \
+	const swizzle<T, N, 4, 2, 2, 1, 2> _z##_z##_y##_z; \
+	const swizzle<T, N, 4, 2, 2, 2, 0> _z##_z##_z##_x; \
+	const swizzle<T, N, 4, 2, 2, 2, 1> _z##_z##_z##_y; \
+	const swizzle<T, N, 4, 2, 2, 2, 2> _z##_z##_z##_z
+*/
+
 template <typename T>
 class vector_storage<T, 3> {
 protected:
@@ -524,6 +408,18 @@ public:
 		swizzle<T, N, 1, 0x02> z;
 		swizzle<T, N, 1, 0x02> b;
 		swizzle<T, N, 1, 0x02> p;
+
+		/*
+		swizzle<T, N, 1, 0> x;
+		swizzle<T, N, 1, 0> r;
+		swizzle<T, N, 1, 0> s;
+		swizzle<T, N, 1, 1> y;
+		swizzle<T, N, 1, 1> g;
+		swizzle<T, N, 1, 1> t;
+		swizzle<T, N, 1, 2> z;
+		swizzle<T, N, 1, 2> b;
+		swizzle<T, N, 1, 2> p;
+		*/
 
 #ifdef BF_XYZW
 		BF_SWIZZLES_X(x);
@@ -555,7 +451,7 @@ public:
 		return reinterpret_cast<const T*>(this)[i];
 	}
 
-	vector_storage& operator = (const T operand) {
+	vector_storage& operator = (const T& operand) {
 		for (auto i = 0; i < N; ++i)
 			(*this)[i] = operand;
 		return *this;
@@ -793,6 +689,229 @@ public:
 	const swizzle<T, N, 4, 0x02030303> _w##_w##_w##_z; \
 	const swizzle<T, N, 4, 0x03030303> _w##_w##_w##_w
 
+/*
+#define BF_SWIZZLES_XYZW(_x, _y, _z, _w) \
+	swizzle<T, N, 2, 0, 3> _x##_w; \
+	swizzle<T, N, 2, 1, 3> _y##_w; \
+	swizzle<T, N, 2, 2, 3> _z##_w; \
+	swizzle<T, N, 2, 3, 0> _w##_x; \
+	swizzle<T, N, 2, 3, 1> _w##_y; \
+	swizzle<T, N, 2, 3, 2> _w##_z; \
+	const swizzle<T, N, 2, 3, 3> _w##_w; \
+	const swizzle<T, N, 3, 0, 0, 3> _x##_x##_w; \
+	swizzle<T, N, 3, 0, 1, 3> _x##_y##_w; \
+	swizzle<T, N, 3, 0, 2, 3> _x##_z##_w; \
+	const swizzle<T, N, 3, 0, 3, 0> _x##_w##_x; \
+	swizzle<T, N, 3, 0, 3, 1> _x##_w##_y; \
+	swizzle<T, N, 3, 0, 3, 2> _x##_w##_z; \
+	const swizzle<T, N, 3, 0, 3, 3> _x##_w##_w; \
+	swizzle<T, N, 3, 1, 0, 3> _y##_x##_w; \
+	const swizzle<T, N, 3, 1, 1, 3> _y##_y##_w; \
+	swizzle<T, N, 3, 1, 2, 3> _y##_z##_w; \
+	swizzle<T, N, 3, 1, 3, 0> _y##_w##_x; \
+	const swizzle<T, N, 3, 1, 3, 1> _y##_w##_y; \
+	swizzle<T, N, 3, 1, 3, 2> _y##_w##_z; \
+	const swizzle<T, N, 3, 1, 3, 3> _y##_w##_w; \
+	swizzle<T, N, 3, 2, 0, 3> _z##_x##_w; \
+	swizzle<T, N, 3, 2, 1, 3> _z##_y##_w; \
+	const swizzle<T, N, 3, 2, 2, 3> _z##_z##_w; \
+	swizzle<T, N, 3, 2, 3, 0> _z##_w##_x; \
+	swizzle<T, N, 3, 2, 3, 1> _z##_w##_y; \
+	const swizzle<T, N, 3, 2, 3, 2> _z##_w##_z; \
+	const swizzle<T, N, 3, 2, 3, 3> _z##_w##_w; \
+	const swizzle<T, N, 3, 3, 0, 0> _w##_x##_x; \
+	swizzle<T, N, 3, 3, 0, 1> _w##_x##_y; \
+	swizzle<T, N, 3, 3, 0, 2> _w##_x##_z; \
+	const swizzle<T, N, 3, 3, 0, 3> _w##_x##_w; \
+	swizzle<T, N, 3, 3, 1, 0> _w##_y##_x; \
+	const swizzle<T, N, 3, 3, 1, 1> _w##_y##_y; \
+	swizzle<T, N, 3, 3, 1, 2> _w##_y##_z; \
+	const swizzle<T, N, 3, 3, 1, 3> _w##_y##_w; \
+	swizzle<T, N, 3, 3, 2, 0> _w##_z##_x; \
+	swizzle<T, N, 3, 3, 2, 1> _w##_z##_y; \
+	const swizzle<T, N, 3, 3, 2, 2> _w##_z##_z; \
+	const swizzle<T, N, 3, 3, 2, 3> _w##_z##_w; \
+	const swizzle<T, N, 3, 3, 3, 0> _w##_w##_x; \
+	const swizzle<T, N, 3, 3, 3, 1> _w##_w##_y; \
+	const swizzle<T, N, 3, 3, 3, 2> _w##_w##_z; \
+	const swizzle<T, N, 3, 3, 3, 3> _w##_w##_w; \
+	const swizzle<T, N, 4, 0, 0, 0, 3> _x##_x##_x##_w; \
+	const swizzle<T, N, 4, 0, 0, 1, 3> _x##_x##_y##_w; \
+	const swizzle<T, N, 4, 0, 0, 2, 3> _x##_x##_z##_w; \
+	const swizzle<T, N, 4, 0, 0, 3, 0> _x##_x##_w##_x; \
+	const swizzle<T, N, 4, 0, 0, 3, 1> _x##_x##_w##_y; \
+	const swizzle<T, N, 4, 0, 0, 3, 2> _x##_x##_w##_z; \
+	const swizzle<T, N, 4, 0, 0, 3, 3> _x##_x##_w##_w; \
+	const swizzle<T, N, 4, 0, 1, 0, 3> _x##_y##_x##_w; \
+	const swizzle<T, N, 4, 0, 1, 1, 3> _x##_y##_y##_w; \
+	swizzle<T, N, 4, 0, 1, 2, 3> _x##_y##_z##_w; \
+	const swizzle<T, N, 4, 0, 1, 3, 0> _x##_y##_w##_x; \
+	const swizzle<T, N, 4, 0, 1, 3, 1> _x##_y##_w##_y; \
+	swizzle<T, N, 4, 0, 1, 3, 2> _x##_y##_w##_z; \
+	const swizzle<T, N, 4, 0, 1, 3, 3> _x##_y##_w##_w; \
+	const swizzle<T, N, 4, 0, 2, 0, 3> _x##_z##_x##_w; \
+	swizzle<T, N, 4, 0, 2, 1, 3> _x##_z##_y##_w; \
+	const swizzle<T, N, 4, 0, 2, 2, 3> _x##_z##_z##_w; \
+	const swizzle<T, N, 4, 0, 2, 3, 0> _x##_z##_w##_x; \
+	swizzle<T, N, 4, 0, 2, 3, 1> _x##_z##_w##_y; \
+	const swizzle<T, N, 4, 0, 2, 3, 2> _x##_z##_w##_z; \
+	const swizzle<T, N, 4, 0, 2, 3, 3> _x##_z##_w##_w; \
+	const swizzle<T, N, 4, 0, 3, 0, 0> _x##_w##_x##_x; \
+	const swizzle<T, N, 4, 0, 3, 0, 1> _x##_w##_x##_y; \
+	const swizzle<T, N, 4, 0, 3, 0, 2> _x##_w##_x##_z; \
+	const swizzle<T, N, 4, 0, 3, 0, 3> _x##_w##_x##_w; \
+	const swizzle<T, N, 4, 0, 3, 1, 0> _x##_w##_y##_x; \
+	const swizzle<T, N, 4, 0, 3, 1, 1> _x##_w##_y##_y; \
+	swizzle<T, N, 4, 0, 3, 1, 2> _x##_w##_y##_z; \
+	const swizzle<T, N, 4, 0, 3, 1, 3> _x##_w##_y##_w; \
+	const swizzle<T, N, 4, 0, 3, 2, 0> _x##_w##_z##_x; \
+	swizzle<T, N, 4, 0, 3, 2, 1> _x##_w##_z##_y; \
+	const swizzle<T, N, 4, 0, 3, 2, 2> _x##_w##_z##_z; \
+	const swizzle<T, N, 4, 0, 3, 2, 3> _x##_w##_z##_w; \
+	const swizzle<T, N, 4, 0, 3, 3, 0> _x##_w##_w##_x; \
+	const swizzle<T, N, 4, 0 ,3, 3, 1> _x##_w##_w##_y; \
+	const swizzle<T, N, 4, 0, 3, 3, 2> _x##_w##_w##_z; \
+	const swizzle<T, N, 4, 0, 3, 3, 3> _x##_w##_w##_w; \
+	const swizzle<T, N, 4, 1, 0, 0, 3> _y##_x##_x##_w; \
+	const swizzle<T, N, 4, 1, 0, 1, 3> _y##_x##_y##_w; \
+	swizzle<T, N, 4, 1, 0, 2, 3> _y##_x##_z##_w; \
+	const swizzle<T, N, 4, 1, 0, 3, 0> _y##_x##_w##_x; \
+	const swizzle<T, N, 4, 1, 0, 3, 1> _y##_x##_w##_y; \
+	swizzle<T, N, 4, 1, 0, 3, 2> _y##_x##_w##_z; \
+	const swizzle<T, N, 4, 1, 0, 3, 3> _y##_x##_w##_w; \
+	const swizzle<T, N, 4, 1, 1, 0, 3> _y##_y##_x##_w; \
+	const swizzle<T, N, 4, 1, 1, 1, 3> _y##_y##_y##_w; \
+	const swizzle<T, N, 4, 1, 1, 2, 3> _y##_y##_z##_w; \
+	const swizzle<T, N, 4, 1, 1, 3, 0> _y##_y##_w##_x; \
+	const swizzle<T, N, 4, 1, 1, 3, 1> _y##_y##_w##_y; \
+	const swizzle<T, N, 4, 1, 1, 3, 2> _y##_y##_w##_z; \
+	const swizzle<T, N, 4, 1, 1, 3, 3> _y##_y##_w##_w; \
+	swizzle<T, N, 4, 1, 2, 0, 3> _y##_z##_x##_w; \
+	const swizzle<T, N, 4, 1, 2, 1, 3> _y##_z##_y##_w; \
+	const swizzle<T, N, 4, 1, 2, 2, 3> _y##_z##_z##_w; \
+	swizzle<T, N, 4, 1, 2, 3, 0> _y##_z##_w##_x; \
+	const swizzle<T, N, 4, 1, 2, 3, 1> _y##_z##_w##_y; \
+	const swizzle<T, N, 4, 1, 2, 3, 2> _y##_z##_w##_z; \
+	const swizzle<T, N, 4, 1, 2, 3, 3> _y##_z##_w##_w; \
+	const swizzle<T, N, 4, 1, 3, 0, 0> _y##_w##_x##_x; \
+	const swizzle<T, N, 4, 1, 3, 0, 1> _y##_w##_x##_y; \
+	swizzle<T, N, 4, 1, 3, 0, 2> _y##_w##_x##_z; \
+	const swizzle<T, N, 4, 1, 3, 0, 3> _y##_w##_x##_w; \
+	const swizzle<T, N, 4, 1, 3, 1, 0> _y##_w##_y##_x; \
+	const swizzle<T, N, 4, 1, 3, 1, 1> _y##_w##_y##_y; \
+	const swizzle<T, N, 4, 1, 3, 1, 2> _y##_w##_y##_z; \
+	const swizzle<T, N, 4, 1, 3, 1, 3> _y##_w##_y##_w; \
+	swizzle<T, N, 4, 1, 3, 2, 0> _y##_w##_z##_x; \
+	const swizzle<T, N, 4, 1, 3, 2, 1> _y##_w##_z##_y; \
+	const swizzle<T, N, 4, 1, 3, 2, 2> _y##_w##_z##_z; \
+	const swizzle<T, N, 4, 1, 3, 2, 3> _y##_w##_z##_w; \
+	const swizzle<T, N, 4, 1, 3, 3, 0> _y##_w##_w##_x; \
+	const swizzle<T, N, 4, 1, 3, 3, 1> _y##_w##_w##_y; \
+	const swizzle<T, N, 4, 1, 3, 3, 2> _y##_w##_w##_z; \
+	const swizzle<T, N, 4, 1, 3, 3, 3> _y##_w##_w##_w; \
+	const swizzle<T, N, 4, 2, 0, 0, 3> _z##_x##_x##_w; \
+	swizzle<T, N, 4, 2, 0, 1, 3> _z##_x##_y##_w; \
+	const swizzle<T, N, 4, 2, 0, 2, 3> _z##_x##_z##_w; \
+	const swizzle<T, N, 4, 2, 0, 3, 0> _z##_x##_w##_x; \
+	swizzle<T, N, 4, 2, 0, 3, 1> _z##_x##_w##_y; \
+	const swizzle<T, N, 4, 2, 0, 3, 2> _z##_x##_w##_z; \
+	const swizzle<T, N, 4, 2, 0, 3, 3> _z##_x##_w##_w; \
+	swizzle<T, N, 4, 2, 1, 0, 3> _z##_y##_x##_w; \
+	const swizzle<T, N, 4, 2, 1, 1, 3> _z##_y##_y##_w; \
+	const swizzle<T, N, 4, 2, 1, 2, 3> _z##_y##_z##_w; \
+	swizzle<T, N, 4, 2, 1, 3, 0> _z##_y##_w##_x; \
+	const swizzle<T, N, 4, 2, 1, 3, 1> _z##_y##_w##_y; \
+	const swizzle<T, N, 4, 2, 1, 3, 2> _z##_y##_w##_z; \
+	const swizzle<T, N, 4, 2, 1, 3, 3> _z##_y##_w##_w; \
+	const swizzle<T, N, 4, 2, 2, 0, 3> _z##_z##_x##_w; \
+	const swizzle<T, N, 4, 2, 2, 1, 3> _z##_z##_y##_w; \
+	const swizzle<T, N, 4, 2, 2, 2, 3> _z##_z##_z##_w; \
+	const swizzle<T, N, 4, 2, 2, 3, 0> _z##_z##_w##_x; \
+	const swizzle<T, N, 4, 2, 2, 3, 1> _z##_z##_w##_y; \
+	const swizzle<T, N, 4, 2, 2, 3, 2> _z##_z##_w##_z; \
+	const swizzle<T, N, 4, 2, 2, 3, 3> _z##_z##_w##_w; \
+	const swizzle<T, N, 4, 2, 3, 0, 0> _z##_w##_x##_x; \
+	swizzle<T, N, 4, 2, 3, 0, 1> _z##_w##_x##_y; \
+	const swizzle<T, N, 4, 2, 3, 0, 2> _z##_w##_x##_z; \
+	const swizzle<T, N, 4, 2, 3, 0, 3> _z##_w##_x##_w; \
+	swizzle<T, N, 4, 2, 3, 1, 0> _z##_w##_y##_x; \
+	const swizzle<T, N, 4, 2, 3, 1, 1> _z##_w##_y##_y; \
+	const swizzle<T, N, 4, 2, 3, 1, 2> _z##_w##_y##_z; \
+	const swizzle<T, N, 4, 2, 3, 1, 3> _z##_w##_y##_w; \
+	const swizzle<T, N, 4, 2, 3, 2, 0> _z##_w##_z##_x; \
+	const swizzle<T, N, 4, 2, 3, 2, 1> _z##_w##_z##_y; \
+	const swizzle<T, N, 4, 2, 3, 2, 2> _z##_w##_z##_z; \
+	const swizzle<T, N, 4, 2, 3, 2, 3> _z##_w##_z##_w; \
+	const swizzle<T, N, 4, 2, 3, 3, 0> _z##_w##_w##_x; \
+	const swizzle<T, N, 4, 2, 3, 3, 1> _z##_w##_w##_y; \
+	const swizzle<T, N, 4, 2, 3, 3, 2> _z##_w##_w##_z; \
+	const swizzle<T, N, 4, 2, 3, 3, 3> _z##_w##_w##_w; \
+	const swizzle<T, N, 4, 3, 0, 0, 0> _w##_x##_x##_x; \
+	const swizzle<T, N, 4, 3, 0, 0, 1> _w##_x##_x##_y; \
+	const swizzle<T, N, 4, 3, 0, 0, 2> _w##_x##_x##_z; \
+	const swizzle<T, N, 4, 3, 0, 0, 3> _w##_x##_x##_w; \
+	const swizzle<T, N, 4, 3, 0, 1, 0> _w##_x##_y##_x; \
+	const swizzle<T, N, 4, 3, 0, 1, 1> _w##_x##_y##_y; \
+	swizzle<T, N, 4, 3, 0, 1, 2> _w##_x##_y##_z; \
+	const swizzle<T, N, 4, 3, 0, 1, 3> _w##_x##_y##_w; \
+	const swizzle<T, N, 4, 3, 0, 2, 0> _w##_x##_z##_x; \
+	swizzle<T, N, 4, 3, 0, 2, 1> _w##_x##_z##_y; \
+	const swizzle<T, N, 4, 3, 0, 2, 2> _w##_x##_z##_z; \
+	const swizzle<T, N, 4, 3, 0, 2, 3> _w##_x##_z##_w; \
+	const swizzle<T, N, 4, 3, 0, 3, 0> _w##_x##_w##_x; \
+	const swizzle<T, N, 4, 3, 0, 3, 1> _w##_x##_w##_y; \
+	const swizzle<T, N, 4, 3, 0, 3, 2> _w##_x##_w##_z; \
+	const swizzle<T, N, 4, 3, 0, 3, 3> _w##_x##_w##_w; \
+	const swizzle<T, N, 4, 3, 1, 0, 0> _w##_y##_x##_x; \
+	const swizzle<T, N, 4, 3, 1, 0, 1> _w##_y##_x##_y; \
+	swizzle<T, N, 4, 3, 1, 0, 2> _w##_y##_x##_z; \
+	const swizzle<T, N, 4, 3, 1, 0, 3> _w##_y##_x##_w; \
+	const swizzle<T, N, 4, 3, 1, 1, 0> _w##_y##_y##_x; \
+	const swizzle<T, N, 4, 3, 1, 1, 1> _w##_y##_y##_y; \
+	const swizzle<T, N, 4, 3, 1, 1, 2> _w##_y##_y##_z; \
+	const swizzle<T, N, 4, 3, 1, 1, 3> _w##_y##_y##_w; \
+	swizzle<T, N, 4, 3, 1, 2, 0> _w##_y##_z##_x; \
+	const swizzle<T, N, 4, 3, 1, 2, 1> _w##_y##_z##_y; \
+	const swizzle<T, N, 4, 3, 1, 2, 2> _w##_y##_z##_z; \
+	const swizzle<T, N, 4, 3, 1, 2, 3> _w##_y##_z##_w; \
+	const swizzle<T, N, 4, 3, 1, 3, 0> _w##_y##_w##_x; \
+	const swizzle<T, N, 4, 3, 1, 3, 1> _w##_y##_w##_y; \
+	const swizzle<T, N, 4, 3, 1, 3, 2> _w##_y##_w##_z; \
+	const swizzle<T, N, 4, 3, 1, 3, 3> _w##_y##_w##_w; \
+	const swizzle<T, N, 4, 3, 2, 0, 0> _w##_z##_x##_x; \
+	swizzle<T, N, 4, 3, 2, 0, 1> _w##_z##_x##_y; \
+	const swizzle<T, N, 4, 3, 2, 0, 2> _w##_z##_x##_z; \
+	const swizzle<T, N, 4, 3, 2, 0, 3> _w##_z##_x##_w; \
+	swizzle<T, N, 4, 3, 2, 1, 0> _w##_z##_y##_x; \
+	const swizzle<T, N, 4, 3, 2, 1, 1> _w##_z##_y##_y; \
+	const swizzle<T, N, 4, 3, 2, 1, 2> _w##_z##_y##_z; \
+	const swizzle<T, N, 4, 3, 2, 1, 3> _w##_z##_y##_w; \
+	const swizzle<T, N, 4, 3, 2, 2, 0> _w##_z##_z##_x; \
+	const swizzle<T, N, 4, 3, 2, 2, 1> _w##_z##_z##_y; \
+	const swizzle<T, N, 4, 3, 2, 2, 2> _w##_z##_z##_z; \
+	const swizzle<T, N, 4, 3, 2, 2, 3> _w##_z##_z##_w; \
+	const swizzle<T, N, 4, 3, 2, 3, 0> _w##_z##_w##_x; \
+	const swizzle<T, N, 4, 3, 2, 3, 1> _w##_z##_w##_y; \
+	const swizzle<T, N, 4, 3, 2, 3, 2> _w##_z##_w##_z; \
+	const swizzle<T, N, 4, 3, 2, 3, 3> _w##_z##_w##_w; \
+	const swizzle<T, N, 4, 3, 3, 0, 0> _w##_w##_x##_x; \
+	const swizzle<T, N, 4, 3, 3, 0, 1> _w##_w##_x##_y; \
+	const swizzle<T, N, 4, 3, 3, 0, 2> _w##_w##_x##_z; \
+	const swizzle<T, N, 4, 3, 3, 0, 3> _w##_w##_x##_w; \
+	const swizzle<T, N, 4, 3, 3, 1, 0> _w##_w##_y##_x; \
+	const swizzle<T, N, 4, 3, 3, 1, 1> _w##_w##_y##_y; \
+	const swizzle<T, N, 4, 3, 3, 1, 2> _w##_w##_y##_z; \
+	const swizzle<T, N, 4, 3, 3, 1, 3> _w##_w##_y##_w; \
+	const swizzle<T, N, 4, 3, 3, 2, 0> _w##_w##_z##_x; \
+	const swizzle<T, N, 4, 3, 3, 2, 1> _w##_w##_z##_y; \
+	const swizzle<T, N, 4, 3, 3, 2, 2> _w##_w##_z##_z; \
+	const swizzle<T, N, 4, 3, 3, 2, 3> _w##_w##_z##_w; \
+	const swizzle<T, N, 4, 3, 3, 3, 0> _w##_w##_w##_x; \
+	const swizzle<T, N, 4, 3, 3, 3, 1> _w##_w##_w##_y; \
+	const swizzle<T, N, 4, 3, 3, 3, 2> _w##_w##_w##_z; \
+	const swizzle<T, N, 4, 3, 3, 3, 3> _w##_w##_w##_w
+*/
+
 template <typename T>
 class vector_storage<T, 4> {
 protected:
@@ -809,6 +928,18 @@ public:
 		swizzle<T, N, 1, 0x02> z;
 		swizzle<T, N, 1, 0x02> b;
 		swizzle<T, N, 1, 0x02> p;
+
+		/*
+		swizzle<T, N, 1, 0> x;
+		swizzle<T, N, 1, 0> r;
+		swizzle<T, N, 1, 0> s;
+		swizzle<T, N, 1, 1> y;
+		swizzle<T, N, 1, 1> g;
+		swizzle<T, N, 1, 1> t;
+		swizzle<T, N, 1, 2> z;
+		swizzle<T, N, 1, 2> b;
+		swizzle<T, N, 1, 2> p;
+		*/
 
 #ifdef BF_XYZW
 		BF_SWIZZLES_X(x);
@@ -843,7 +974,7 @@ public:
 		return reinterpret_cast<const T*>(this)[i];
 	}
 
-	vector_storage& operator = (const T operand) {
+	vector_storage& operator = (const T& operand) {
 		for (auto i = 0; i < N; ++i)
 			(*this)[i] = operand;
 		return *this;
@@ -919,7 +1050,7 @@ public:
 		(*this)[0] = T(vec[0]);
 	}
 
-	vector& operator = (const T operand) {
+	vector& operator = (const T& operand) {
 		vector_storage<T, N>::operator=(operand);
 		return *this;
 	}
@@ -969,7 +1100,7 @@ public:
 	vector(const vector_usage<T2, N, S2>& vec) : vector_plural<T, N>(vec) {
 	}
 
-	vector& operator = (const T operand) {
+	vector& operator = (const T& operand) {
 		vector_storage<T, N>::operator=(operand);
 		return *this;
 	}
@@ -1036,7 +1167,7 @@ public:
 	vector(const vector_usage<T2, N, S2>& vec) : vector_plural<T, N>(vec) {
 	}
 
-	vector& operator = (const T operand) {
+	vector& operator = (const T& operand) {
 		vector_storage<T, N>::operator=(operand);
 		return *this;
 	}
@@ -1131,7 +1262,7 @@ public:
 	vector(const vector_usage<T2, N, S2>& vec) : vector_plural<T, N>(vec) {
 	}
 
-	vector& operator = (const T operand) {
+	vector& operator = (const T& operand) {
 		vector_storage<T, N>::operator=(operand);
 		return *this;
 	}

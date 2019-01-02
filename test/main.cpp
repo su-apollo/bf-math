@@ -6,6 +6,7 @@
 #include <io.h>
 #include <fcntl.h>
 
+#include <vector>
 #include <string>
 #include <type_traits>
 
@@ -30,6 +31,8 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	CreateConsole();
 
 	std::cout << "Hello World!" << std::endl;
+
+	std::vector<int> temp;
 
 	std::string test;
 
