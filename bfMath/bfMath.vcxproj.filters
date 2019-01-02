@@ -30,7 +30,7 @@
     <ClInclude Include="vector-storage.hpp">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="vector-operater.hpp">
+    <ClInclude Include="vector-operator.hpp">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

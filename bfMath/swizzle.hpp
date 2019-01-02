@@ -37,14 +37,30 @@ public:
 		return *this;
 	}
 
+	swizzle_storage& operator = (T&& operand) {
+		for (auto i = 0; i < N; ++i)
+			(*this)[i] = std::move(operand);
+
+		return *this;
+	}
+
 	template <typename T2, typename S2>
 	swizzle_storage& operator = (const vector_usage<T2, N, S2>& operand) {
 		vector<T, N> temp;
+
 		for (auto i = 0; i < N; ++i)
 			temp[i] = operand[i];
 
 		for (auto i = 0; i < N; ++i)
 			(*this)[i] = temp[i];
+
+		return *this;
+	}
+
+	template <typename T2, typename S2>
+	swizzle_storage& operator = (vector_usage<T2, N, S2>&& operand) {
+		for (auto i = 0; i < N; ++i)
+			(*this)[i] = std::move(operand[i]);
 
 		return *this;
 	}
@@ -58,8 +74,19 @@ public:
 		return *this;
 	}
 
+	swizzle& operator = (T&& operand) {
+		swizzle_storage<T, STORAGE, N, MASK>::operator=(operand);
+		return *this;
+	}
+
 	template<typename T2, typename S2>
 	swizzle& operator = (const vector_usage<T2, N, S2>& operand) {
+		swizzle_storage<T, STORAGE, N, MASK>::operator=(operand);
+		return *this;
+	}
+
+	template<typename T2, typename S2>
+	swizzle& operator = (vector_usage<T2, N, S2>&& operand) {
 		swizzle_storage<T, STORAGE, N, MASK>::operator=(operand);
 		return *this;
 	}
@@ -73,9 +100,20 @@ public:
 		return *this;
 	}
 
+	swizzle& operator = (T&& operand) {
+		swizzle_storage<T, STORAGE, 1, MASK>::operator=(std::forward<T>(operand));
+		return *this;
+	}
+
 	template<typename T2, typename S2>
 	swizzle& operator = (const vector_usage<T2, 1, S2>& operand) {
 		swizzle_storage<T, STORAGE, 1, MASK>::operator=(operand);
+		return *this;
+	}
+
+	template<typename T2, typename S2>
+	swizzle& operator = (vector_usage<T2, 1, S2>&& operand) {
+		swizzle_storage<T, STORAGE, 1, MASK>::operator=(std::forward<vector_usage<T2, 1, S2>>(operand));
 		return *this;
 	}
 

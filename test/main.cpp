@@ -6,10 +6,6 @@
 #include <io.h>
 #include <fcntl.h>
 
-#include <vector>
-#include <string>
-#include <type_traits>
-
 void CreateConsole() {
 	if (::AllocConsole())
 	{
@@ -32,16 +28,6 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 
 	std::cout << "Hello World!" << std::endl;
 
-	std::vector<int> temp;
-
-	std::string test;
-
-	if (std::is_scalar<int>::value)
-		std::cout << "int is scalar" << std::endl;
-
-	if (std::is_scalar<bool>::value)
-		std::cout << "bool is scalar" << std::endl;
-
 	bf::float1 vec1(1.f);
 	bf::float2 vec2(1.f, 2.f);
 	bf::float3 vec3(1.f, 2.f, 3.f);
@@ -50,6 +36,9 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	bf::float4 foo(0);
 	foo.yx = bf::float2(2, 1);
 	foo.zw = foo.xy * 2;
+
+	bf::float4 temp = std::move(foo);
+	bf::float4 temp2(std::move(temp));
 
 	system("PAUSE");
 	// Exit program

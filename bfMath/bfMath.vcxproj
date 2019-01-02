@@ -69,7 +69,7 @@
     <ClInclude Include="stpq.hpp" />
     <ClInclude Include="swizzle.hpp" />
     <ClInclude Include="vector-storage.hpp" />
-    <ClInclude Include="vector-operater.hpp" />
+    <ClInclude Include="vector-operator.hpp" />
     <ClInclude Include="vector.hpp" />
     <ClInclude Include="vector-usage.hpp" />
     <ClInclude Include="xyzw.hpp" />

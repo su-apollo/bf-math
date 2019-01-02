@@ -67,6 +67,13 @@ public:
 		return *this;
 	}
 
+	vector_storage& operator = (T&& operand) {
+		for (auto i = 0; i < N; ++i)
+			(*this)[i] = std::move(operand);
+
+		return *this;
+	}
+
 	template <typename T2, typename S2>
 	vector_storage& operator = (const vector_usage<T2, N, S2>& operand) {
 		vector<T, N> temp;
@@ -77,6 +84,14 @@ public:
 		for (auto i = 0; i < N; ++i)
 			(*this)[i] = temp[i];
 		
+		return *this;
+	}
+
+	template <typename T2, typename S2>
+	vector_storage& operator = (vector_usage<T2, N, S2>&& operand) {
+		for (auto i = 0; i < N; ++i)
+			(*this)[i] = std::move(operand[i]);
+
 		return *this;
 	}
 };
@@ -194,6 +209,13 @@ public:
 		return *this;
 	}
 
+	vector_storage& operator = (T&& operand) {
+		for (auto i = 0; i < N; ++i)
+			(*this)[i] = std::move(operand);
+
+		return *this;
+	}
+
 	template <typename T2, typename S2>
 	vector_storage& operator = (const vector_usage<T2, N, S2>& operand) {
 		vector<T, N> temp;
@@ -203,6 +225,14 @@ public:
 
 		for (auto i = 0; i < N; ++i)
 			(*this)[i] = temp[i];
+
+		return *this;
+	}
+
+	template <typename T2, typename S2>
+	vector_storage& operator = (vector_usage<T2, N, S2>&& operand) {
+		for (auto i = 0; i < N; ++i)
+			(*this)[i] = std::move(operand[i]);
 
 		return *this;
 	}
@@ -454,16 +484,35 @@ public:
 	vector_storage& operator = (const T& operand) {
 		for (auto i = 0; i < N; ++i)
 			(*this)[i] = operand;
+
+		return *this;
+	}
+
+	vector_storage& operator = (T&& operand) {
+		for (auto i = 0; i < N; ++i)
+			(*this)[i] = std::move(operand);
+
 		return *this;
 	}
 
 	template <typename T2, typename S2>
 	vector_storage& operator = (const vector_usage<T2, N, S2>& operand) {
 		vector<T, N> temp;
+		
 		for (auto i = 0; i < N; ++i)
 			temp[i] = operand[i];
+
 		for (auto i = 0; i < N; ++i)
 			(*this)[i] = temp[i];
+		
+		return *this;
+	}
+
+	template <typename T2, typename S2>
+	vector_storage& operator = (vector_usage<T2, N, S2>&& operand) {
+		for (auto i = 0; i < N; ++i)
+			(*this)[i] = std::move(operand[i]);
+
 		return *this;
 	}
 };
@@ -977,16 +1026,35 @@ public:
 	vector_storage& operator = (const T& operand) {
 		for (auto i = 0; i < N; ++i)
 			(*this)[i] = operand;
+
+		return *this;
+	}
+
+	vector_storage& operator = (T&& operand) {
+		for (auto i = 0; i < N; ++i)
+			(*this)[i] = std::move(operand);
+
 		return *this;
 	}
 
 	template <typename T2, typename S2>
 	vector_storage& operator = (const vector_usage<T2, N, S2>& operand) {
 		vector<T, N> temp;
+		
 		for (auto i = 0; i < N; ++i)
 			temp[i] = operand[i];
+
 		for (auto i = 0; i < N; ++i)
 			(*this)[i] = temp[i];
+		
+		return *this;
+	}
+
+	template <typename T2, typename S2>
+	vector_storage& operator = (vector_usage<T2, N, S2>&& operand) {
+		for (auto i = 0; i < N; ++i)
+			(*this)[i] = std::move(operand[i]);
+
 		return *this;
 	}
 };
@@ -994,8 +1062,8 @@ public:
 template <typename T, std::size_t N>
 class vector_plural : public vector_plural_usage<T, N, vector_storage<T, N>> {
 public:
-	vector_plural() {
-	}
+	vector_plural() = default;
+	~vector_plural() = default;
 
 	vector_plural(const T& sca) {
 		for (auto i = 0; i < N; ++i)
@@ -1006,6 +1074,12 @@ public:
 	vector_plural(const vector_plural_usage<T, N, S2>& vec) {
 		for (auto i = 0; i < N; ++i)
 			(*this)[i] = vec[i];
+	}
+
+	template <typename S2>
+	vector_plural(vector_plural_usage<T, N, S2>&& vec) {
+		for (auto i = 0; i < N; ++i)
+			(*this)[i] = std::move(vec[i]);
 	}
 
 	template <typename T2, typename S2>
@@ -1033,16 +1107,24 @@ private:
 	static const std::size_t N = 1;
 
 public:
-	vector() {
-	}
+	vector() = default;
 
 	vector(const T& sca) {
 		(*this)[0] = sca;
 	}
 
+	vector(T&& sca) {
+		(*this)[0] = std::move(sca);
+	}
+
 	template <typename S2>
 	vector(const vector_usage<T, N, S2>& vec) {
 		(*this)[0] = vec[0];
+	}
+
+	template <typename S2>
+	vector(vector_usage<T, N, S2>&& vec) {
+		(*this)[0] = std::move(vec[0]);
 	}
 
 	template <typename T2, typename S2>
@@ -1055,9 +1137,20 @@ public:
 		return *this;
 	}
 
+	vector& operator = (T&& operand) {
+		vector_storage<T, N>::operator=(std::forward<T>(operand));
+		return *this;
+	}
+
 	template <typename T2, typename S2>
 	vector& operator = (const vector_usage<T2, N, S2>& operand) {
 		vector_storage<T, N>::operator=(operand);
+		return *this;
+	}
+
+	template <typename T2, typename S2>
+	vector& operator = (vector_usage<T2, N, S2>&& operand) {
+		vector_storage<T, N>::operator=(std::forward<vector_usage<T2, N, S2>>(operand));
 		return *this;
 	}
 
@@ -1072,8 +1165,8 @@ private:
 	static const std::size_t N = 2;
 
 public:
-	vector() {
-	}
+	vector() = default;
+	~vector() = default;
 
 	template <typename TA, typename TB>
 	vector(const TA& a, const TB& b) {
@@ -1092,6 +1185,10 @@ public:
 	vector(const vector_usage<T, N, S2>& vec) : vector_plural<T, N>(vec) {
 	}
 
+	template <typename S2>
+	vector(vector_usage<T, N, S2>&& vec) : vector_plural<T, N>(std::forward<vector_usage<T, N, S2>>(vec)) {
+	}
+
 	template <typename T2, typename S2>
 	vector(const vector_usage<T2, 1, S2>& vec) : vector_plural<T, N>(vec) {
 	}
@@ -1105,15 +1202,32 @@ public:
 		return *this;
 	}
 
+	vector& operator = (T&& operand) {
+		vector_storage<T, N>::operator=(std::forward<T>(operand));
+		return *this;
+	}
+
 	template <typename T2, typename S2>
 	vector& operator = (const vector_usage<T2, N, S2>& operand) {
 		vector_storage<T, N>::operator=(operand);
 		return *this;
 	}
 
+	template <typename T2, typename S2>
+	vector& operator = (vector_usage<T2, N, S2>&& operand) {
+		vector_storage<T, N>::operator=(std::forward<vector_usage<T2, N, S2>>(operand));
+		return *this;
+	}
+
 	vector& operator = (const vector& operand) {
 		(*this)[0] = operand[0];
 		(*this)[1] = operand[1];
+		return *this;
+	}
+
+	vector& operator = (vector&& operand) {
+		(*this)[0] = std::move(operand[0]);
+		(*this)[1] = std::move(operand[1]);
 		return *this;
 	}
 };
@@ -1124,8 +1238,8 @@ private:
 	static const std::size_t N = 3;
 
 public:
-	vector() {
-	}
+	vector() = default;
+	~vector() = default;
 
 	template <typename TA, typename TB, typename TC>
 	vector(const TA& a, const TB& b, const TC& c) {
@@ -1159,6 +1273,10 @@ public:
 	vector(const vector_usage<T, N, S2>& vec) : vector_plural<T, N>(vec) {
 	}
 
+	template <typename S2>
+	vector(vector_usage<T, N, S2>&& vec) : vector_plural<T, N>(std::forward<vector_usage<T, N, S2>>(vec)) {
+	}
+
 	template <typename T2, typename S2>
 	vector(const vector_usage<T2, 1, S2>& vec) : vector_plural<T, N>(vec) {
 	}
@@ -1172,9 +1290,20 @@ public:
 		return *this;
 	}
 
+	vector& operator = (T&& operand) {
+		vector_storage<T, N>::operator=(std::forward<T>(operand));
+		return *this;
+	}
+
 	template <typename T2, typename S2>
 	vector& operator = (const vector_usage<T2, N, S2>& operand) {
 		vector_storage<T, N>::operator=(operand);
+		return *this;
+	}
+
+	template <typename T2, typename S2>
+	vector& operator = (vector_usage<T2, N, S2>&& operand) {
+		vector_storage<T, N>::operator=(std::forward<vector_usage<T2, N, S2>>(operand));
 		return *this;
 	}
 
@@ -1182,6 +1311,13 @@ public:
 		(*this)[0] = operand[0];
 		(*this)[1] = operand[1];
 		(*this)[2] = operand[2];
+		return *this;
+	}
+
+	vector& operator = (vector&& operand) {
+		(*this)[0] = std::move(operand[0]);
+		(*this)[1] = std::move(operand[1]);
+		(*this)[2] = std::move(operand[2]);
 		return *this;
 	}
 };
@@ -1192,8 +1328,8 @@ private:
 	static const std::size_t N = 4;
 
 public:
-	vector() {
-	}
+	vector() = default;
+	~vector() = default;
 
 	template <typename TA, typename TB, typename TC, typename TD>
 	vector(const TA& a, const TB& b, const TC& c, const TD& d) {
@@ -1228,7 +1364,7 @@ public:
 	}
 
 	template <typename TA, typename SA, typename TB>
-	vector(const vector_usage<TA, 3, SA> a, const TB& b) {
+	vector(const vector_usage<TA, 3, SA>& a, const TB& b) {
 		(*this)[0] = T(a[0]);
 		(*this)[1] = T(a[1]);
 		(*this)[2] = T(a[2]);
@@ -1236,7 +1372,7 @@ public:
 	}
 
 	template <typename TA, typename TB, typename SB>
-	vector(const TA& a, const vector_usage<TB, 3, SB> b) {
+	vector(const TA& a, const vector_usage<TB, 3, SB>& b) {
 		(*this)[0] = T(a);
 		(*this)[1] = T(b[0]);
 		(*this)[2] = T(b[1]);
@@ -1254,6 +1390,10 @@ public:
 	vector(const vector_usage<T, N, S2>& vec) : vector_plural<T, N>(vec) {
 	}
 
+	template <typename S2>
+	vector(vector_usage<T, N, S2>&& vec) : vector_plural<T, N>(std::forward<vector_usage<T, N, S2>>(vec)) {
+	}
+
 	template <typename T2, typename S2>
 	vector(const vector_usage<T2, 1, S2>& vec) : vector_plural<T, N>(vec) {
 	}
@@ -1267,9 +1407,20 @@ public:
 		return *this;
 	}
 
+	vector& operator = (T&& operand) {
+		vector_storage<T, N>::operator=(std::forward<T>(operand));
+		return *this;
+	}
+
 	template <typename T2, typename S2>
 	vector& operator = (const vector_usage<T2, N, S2>& operand) {
 		vector_storage<T, N>::operator=(operand);
+		return *this;
+	}
+
+	template <typename T2, typename S2>
+	vector& operator = (vector_usage<T2, N, S2>&& operand) {
+		vector_storage<T, N>::operator=(std::forward<vector_usage<T2, N, S2>>(operand));
 		return *this;
 	}
 
@@ -1278,6 +1429,14 @@ public:
 		(*this)[1] = operand[1];
 		(*this)[2] = operand[2];
 		(*this)[3] = operand[3];
+		return *this;
+	}
+
+	vector& operator = (vector&& operand) {
+		(*this)[0] = std::move(operand[0]);
+		(*this)[1] = std::move(operand[1]);
+		(*this)[2] = std::move(operand[2]);
+		(*this)[3] = std::move(operand[3]);
 		return *this;
 	}
 };

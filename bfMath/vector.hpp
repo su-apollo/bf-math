@@ -1,5 +1,5 @@
 #pragma once
-#include "vector-operater.hpp"
+#include "vector-operator.hpp"
 
 namespace bf {
 typedef vector<float, 1> float1;
