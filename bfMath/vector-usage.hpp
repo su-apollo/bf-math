@@ -175,7 +175,7 @@ public:
 		return *this;
 	}
 
-	vector_usage& operator ++ (int) {
+	vector_usage operator ++ (int) {
 		vector_usage ret(*this);
 		for (auto i = 0; i < n; ++i)
 			++(*this)[i];
@@ -188,7 +188,7 @@ public:
 		return *this;
 	}
 
-	vector_usage& operator -- (int) {
+	vector_usage operator -- (int) {
 		vector_usage ret(*this);
 		for (auto i = 0; i < n; ++i)
 			--(*this)[i];
