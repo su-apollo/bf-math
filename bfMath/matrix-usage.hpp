@@ -9,7 +9,6 @@ class matrix_storage {};
 template <typename T, int ROWS, int COLS>
 class matrix {};
 
-// todo :
 template <typename T, int ROWS, int COLS>
 class matrix_usage : public matrix_storage<T, ROWS, COLS>
 {
@@ -32,13 +31,13 @@ public:
 	}
 
 	template <typename T2>
-	matrix_usage(const matrix_usage<T2, ROWS, COLS> & v) {
+	matrix_usage(const matrix_usage<T2, ROWS, COLS>& v) {
 		for (int i = 0; i < ROWS; ++i) {
 			(*this)[i] = vector<T, COLS>(v[i]);
 		}
 	}
 
-	vector<T, COLS> & operator [] (int i) {
+	vector<T, COLS>& operator [] (int i) {
 		value_type* base = reinterpret_cast<value_type*>(this);
 		base += COLS * i;
 		vector<T, COLS>* row = reinterpret_cast<vector<T, COLS>*>(base);
@@ -60,9 +59,24 @@ public:
 		return *this;
 	}
 
+	template <typename T2>
+	matrix_usage& operator = (matrix_usage<T2, ROWS, COLS>&& operand) {
+		for (int i = 0; i < ROWS; ++i) {
+			(*this)[i] = vector<T, COLS>(std::move(operand[i]));
+		}
+		return *this;
+	}
+
 	matrix_usage& operator = (const T& operand) {
 		for (int i = 0; i < ROWS; ++i) {
 			(*this)[i] = s;
+		}
+		return *this;
+	}
+
+	matrix_usage& operator = (T&& operand) {
+		for (int i = 0; i < ROWS; ++i) {
+			(*this)[i] = std::move(s);
 		}
 		return *this;
 	}

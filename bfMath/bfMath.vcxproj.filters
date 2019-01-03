@@ -36,5 +36,8 @@
     <ClInclude Include="matrix-usage.hpp">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="matrix-storage.hpp">
+      <Filter>src</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
