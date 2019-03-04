@@ -6,37 +6,37 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="vector.hpp">
+    <ClInclude Include="..\header\vector.hpp">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="scalar.hpp">
+    <ClInclude Include="..\header\scalar.hpp">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="xyzw.hpp">
+    <ClInclude Include="..\header\xyzw.hpp">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="rgba.hpp">
+    <ClInclude Include="..\header\rgba.hpp">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="stpq.hpp">
+    <ClInclude Include="..\header\stpq.hpp">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="swizzle.hpp">
+    <ClInclude Include="..\header\swizzle.hpp">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="vector-usage.hpp">
+    <ClInclude Include="..\header\vector-usage.hpp">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="vector-storage.hpp">
+    <ClInclude Include="..\header\vector-storage.hpp">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="vector-operator.hpp">
+    <ClInclude Include="..\header\vector-operator.hpp">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="matrix-usage.hpp">
+    <ClInclude Include="..\header\matrix-usage.hpp">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="matrix-storage.hpp">
+    <ClInclude Include="..\header\matrix-storage.hpp">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

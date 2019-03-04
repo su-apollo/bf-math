@@ -5,7 +5,7 @@ VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "test", "test.vcxproj", "{01063811-52B0-4A43-B043-5249A9717BAD}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "bfMath", "..\bfMath\bfMath.vcxproj", "{562A807E-48A7-47B5-8B38-AFB6BCAADAF2}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "bf-math", "bf-math.vcxproj", "{562A807E-48A7-47B5-8B38-AFB6BCAADAF2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

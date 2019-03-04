@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="src">
+      <UniqueIdentifier>{040bab11-6ffd-47c0-834d-0775e696e239}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\header\vector.hpp">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\header\scalar.hpp">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\header\xyzw.hpp">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\header\rgba.hpp">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\header\stpq.hpp">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\header\swizzle.hpp">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\header\vector-usage.hpp">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\header\vector-storage.hpp">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\header\vector-operator.hpp">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\header\matrix-usage.hpp">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\header\matrix-storage.hpp">
+      <Filter>src</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
