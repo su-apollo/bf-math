@@ -74,15 +74,12 @@
   <ItemGroup>
     <ClInclude Include="..\header\matrix-storage.hpp" />
     <ClInclude Include="..\header\matrix-usage.hpp" />
-    <ClInclude Include="..\header\rgba.hpp" />
     <ClInclude Include="..\header\scalar.hpp" />
-    <ClInclude Include="..\header\stpq.hpp" />
     <ClInclude Include="..\header\swizzle.hpp" />
     <ClInclude Include="..\header\vector-storage.hpp" />
     <ClInclude Include="..\header\vector-operator.hpp" />
     <ClInclude Include="..\header\vector.hpp" />
     <ClInclude Include="..\header\vector-usage.hpp" />
-    <ClInclude Include="..\header\xyzw.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

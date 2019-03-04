@@ -22,7 +22,7 @@ public:
 			temp[i] = operand[i];
 		for (auto i = 0; i < N; ++i)
 			(*this)[i] += temp[i];
-		return *this
+		return *this;
 	}
 
 	vector_usage& operator -= (const T& operand) {
@@ -38,7 +38,7 @@ public:
 			temp[i] = operand[i];
 		for (auto i = 0; i < N; ++i)
 			(*this)[i] -= temp[i];
-		return *this
+		return *this;
 	}
 
 	vector_usage& operator *= (const T& operand) {
@@ -54,7 +54,7 @@ public:
 			temp[i] = operand[i];
 		for (auto i = 0; i < N; ++i)
 			(*this)[i] *= temp[i];
-		return *this
+		return *this;
 	}
 
 	vector_usage& operator /= (const T& operand) {
@@ -70,7 +70,7 @@ public:
 			temp[i] = operand[i];
 		for (auto i = 0; i < N; ++i)
 			(*this)[i] /= temp[i];
-		return *this
+		return *this;
 	}
 
 	vector_usage& operator %= (const T& operand) {
@@ -86,7 +86,7 @@ public:
 			temp[i] = operand[i];
 		for (auto i = 0; i < N; ++i)
 			(*this)[i] %= temp[i];
-		return *this
+		return *this;
 	}
 
 	vector_usage& operator ^= (const T& operand) {
@@ -102,7 +102,7 @@ public:
 			temp[i] = operand[i];
 		for (auto i = 0; i < N; ++i)
 			(*this)[i] ^= temp[i];
-		return *this
+		return *this;
 	}
 
 	vector_usage& operator &= (const T& operand) {
@@ -118,7 +118,7 @@ public:
 			temp[i] = operand[i];
 		for (auto i = 0; i < N; ++i)
 			(*this)[i] &= temp[i];
-		return *this
+		return *this;
 	}
 
 	vector_usage& operator |= (const T& operand) {
@@ -134,7 +134,7 @@ public:
 			temp[i] = operand[i];
 		for (auto i = 0; i < N; ++i)
 			(*this)[i] |= temp[i];
-		return *this
+		return *this;
 	}
 
 	vector_usage& operator <<= (const T& operand) {
@@ -150,7 +150,7 @@ public:
 			temp[i] = operand[i];
 		for (auto i = 0; i < N; ++i)
 			(*this)[i] <<= temp[i];
-		return *this
+		return *this;
 	}
 
 	vector_usage& operator >>= (const T& operand) {
@@ -166,7 +166,7 @@ public:
 			temp[i] = operand[i];
 		for (auto i = 0; i < N; ++i)
 			(*this)[i] >>= temp[i];
-		return *this
+		return *this;
 	}
 
 	vector_usage& operator ++ () {
