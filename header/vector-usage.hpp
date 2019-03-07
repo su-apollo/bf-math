@@ -170,27 +170,27 @@ public:
 	}
 
 	vector_usage& operator ++ () {
-		for (auto i = 0; i < n; ++i)
+		for (auto i = 0; i < N; ++i)
 			++(*this)[i];
 		return *this;
 	}
 
-	vector_usage operator ++ (int) {
+	const vector_usage operator ++ (int) {
 		vector_usage ret(*this);
-		for (auto i = 0; i < n; ++i)
+		for (auto i = 0; i < N; ++i)
 			++(*this)[i];
 		return ret;
 	}
 
 	vector_usage& operator -- () {
-		for (auto i = 0; i < n; ++i)
+		for (auto i = 0; i < N; ++i)
 			--(*this)[i];
 		return *this;
 	}
 
-	vector_usage operator -- (int) {
+	const vector_usage operator -- (int) {
 		vector_usage ret(*this);
-		for (auto i = 0; i < n; ++i)
+		for (auto i = 0; i < N; ++i)
 			--(*this)[i];
 		return ret;
 	}
