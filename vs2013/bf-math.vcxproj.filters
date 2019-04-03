@@ -12,15 +12,6 @@
     <ClInclude Include="..\header\scalar.hpp">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\header\xyzw.hpp">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\header\rgba.hpp">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\header\stpq.hpp">
-      <Filter>src</Filter>
-    </ClInclude>
     <ClInclude Include="..\header\swizzle.hpp">
       <Filter>src</Filter>
     </ClInclude>
@@ -37,6 +28,12 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\header\matrix-storage.hpp">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\header\transform.hpp">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\header\rotation.hpp">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
