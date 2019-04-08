@@ -24,16 +24,13 @@
     <ClInclude Include="..\header\vector-operator.hpp">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\header\matrix-usage.hpp">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\header\matrix-storage.hpp">
-      <Filter>src</Filter>
-    </ClInclude>
     <ClInclude Include="..\header\transform.hpp">
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\header\rotation.hpp">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\header\quaternion.hpp">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

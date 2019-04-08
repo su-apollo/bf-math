@@ -64,8 +64,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\header\matrix-storage.hpp" />
-    <ClInclude Include="..\header\matrix-usage.hpp" />
+    <ClInclude Include="..\header\quaternion.hpp" />
     <ClInclude Include="..\header\rotation.hpp" />
     <ClInclude Include="..\header\scalar.hpp" />
     <ClInclude Include="..\header\swizzle.hpp" />
