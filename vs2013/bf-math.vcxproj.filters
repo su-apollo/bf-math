@@ -33,5 +33,8 @@
     <ClInclude Include="..\header\quaternion.hpp">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="..\header\matrix-storage.hpp">
+      <Filter>src</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
